@@ -1,5 +1,10 @@
 {
-  "version": "3.1",
+  "version": "3.2",
   "download_url": "https://github.com/Marijuana1999/CyberHUD/releases/download/v3.1/CyberHUD_v3.1.zip",
   "release_date": "2026-02-22",
+  "changes": [
+    "اضافه شدن فایل تست برای بررسی آپدیت",
+    "رفع باگ‌های جزئی",
+    "بهبود عملکرد کلی"
+  ]
 }

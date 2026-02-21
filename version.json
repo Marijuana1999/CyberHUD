@@ -1,10 +1,4 @@
 {
   "version": "3.1",
-  "changelog": [
-    "Improved DNS Enumeration",
-    "Added GraphQL Scanner",
-    "Better WAF Detection",
-    "Performance Improvements"
-  ],
   "download_url": "https://github.com/Marijuana1999/CyberHUD/releases/download/v3.0/CyberHUD.zip"
 }

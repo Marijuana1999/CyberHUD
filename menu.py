@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
 
-# ======================================================================
-# CYBER HUD - Advanced Security Testing Framework
-# Author: Marijuana1999
-# GitHub: https://github.com/Marijuana1999
-# Version: 3.0 
-# ======================================================================
-
 import curses
 import time
 import json
@@ -16,12 +9,12 @@ import platform
 import sys
 from datetime import datetime
 
+from core.auto_update import get_update_status_for_menu, check_for_update, get_current_version
 from core.core import clear_screen
 
 # ======================================================================
 # CONFIGURATION
 # ======================================================================
-
 THEME_FILE = "theme.json"
 SETTINGS_FILE = "settings.json"
 
@@ -343,6 +336,12 @@ class CyberHUD:
         self.theme = theme
         self.theme_name = self.get_theme_name(theme)
         self.settings = settings
+        
+        # کش برای وضعیت آپدیت
+        self._cached_version_status = None
+        self._last_version_check = 0
+        
+        # منوها
         self.sections = [
             ("TARGET", [
                 {"name": "Set Target", "action": "set_target"},
@@ -361,6 +360,7 @@ class CyberHUD:
                 {"name": "Theme List", "action": "theme_list"},
                 {"name": "Change Font", "action": "change_font"},
                 {"name": "Font Guide", "action": "font_guide"},
+                {"name": "Check for Updates", "action": "check_updates"},
                 {"name": "Waterfall Mode", "action": "toggle_waterfall"},
                 {"name": "Mouse Support", "action": "toggle_mouse"},
                 {"name": "Help", "action": "help"},
@@ -552,10 +552,12 @@ class CyberHUD:
 
     def draw_header(self, scr):
         try:
+            version_status = get_update_status_for_menu()
+            
             scr.addstr(0, 2, "╔════════════════════════════════════════════════════╗", curses.color_pair(1))
-            scr.addstr(1, 2, "             CYBER HUD - Marijuana1999                            ", curses.color_pair(2))
-            scr.addstr(2, 2, "  GitHub: https://github.com/Marijuana1999                        ", curses.color_pair(3))
-            scr.addstr(3, 2, "  Version: 3.0                                                    ", curses.color_pair(2))
+            scr.addstr(1, 2, "         CYBER HUD - Marijuana1999                  ", curses.color_pair(2))
+            scr.addstr(2, 2, f"  GitHub: https://github.com/Marijuana1999          ", curses.color_pair(3))
+            scr.addstr(3, 2, f"  {version_status:<49}", curses.color_pair(2))
             scr.addstr(4, 2, "╚════════════════════════════════════════════════════╝", curses.color_pair(1))
         except:
             pass
@@ -618,9 +620,6 @@ class CyberHUD:
                     scr.addstr(y_offset + i + 1, 7, name, curses.color_pair(2))
         except:
             pass
-
-
-
 
     def draw_items(self, scr):
         try:
@@ -740,6 +739,7 @@ class CyberHUD:
             
         except Exception as e:
             pass
+
     # ==================================================================
     # FONT AND THEME HANDLERS
     # ==================================================================
@@ -1006,12 +1006,14 @@ class CyberHUD:
                 os.execv(sys.executable, [sys.executable] + sys.argv)
 
     def about(self, scr):
+        version_status = get_update_status_for_menu()
+        
         lines = [
             "ABOUT CYBER HUD",
             "",
-            "Author: Marijuana1999",
-            "GitHub: https://github.com/Marijuana1999",
-            "Version: 3.0",
+            f"Author: Marijuana1999",
+            f"GitHub: https://github.com/Marijuana1999",
+            f"Version: {get_current_version()}",
             "",
             "Advanced Security Testing Framework",
             "for Bug Bounty Hunters",
@@ -1029,6 +1031,8 @@ class CyberHUD:
             "Legal Notice:",
             "This tool is for educational purposes only.",
             "Always get proper authorization before testing.",
+            "",
+            f"{version_status}",
             "",
             "Press BACKSPACE to return"
         ]
@@ -1114,6 +1118,7 @@ class CyberHUD:
             "   • Change Theme: Change color theme",
             "   • Waterfall Mode: Toggle matrix effect",
             "   • Mouse Support: Enable/disable mouse",
+            "   • Check for Updates: Check for new version",
             "   • Help / Manual: This help page",
             "   • About: About CyberHUD",
             "",
@@ -1185,6 +1190,12 @@ class CyberHUD:
             return
         if action == "font_guide":
             self.font_guide(scr)
+            return
+        if action == "check_updates":
+            curses.endwin()
+            clear_screen()
+            check_for_update(prompt_user=True)
+            input("\nPress ENTER to continue...")
             return
         if action == "set_target":
             curses.endwin()
@@ -1282,11 +1293,16 @@ class CyberHUD:
 
     def loop(self, scr):
         curses.curs_set(0)
-        scr.keypad(True)
-
+        scr.keypad(True)  # این برای لینوکس/مک خیلی مهمه
+        
+        # تنظیمات اضافی برای لینوکس
+        if platform.system().lower() != "windows":
+            curses.nonl()  # غیرفعال کردن newline mapping
+            curses.raw()    # حالت raw برای دریافت کلیدها
+        
+        # فقط یک بار waterfall اول برنامه
         if self.settings["waterfall"] in ("intro", "always"):
             self.matrix_rain(scr)
-        self.crt_effect(scr)
 
         while True:
             scr.clear()
@@ -1300,12 +1316,20 @@ class CyberHUD:
             self.draw_minimap(scr)
             scr.refresh()
 
+            # گرفتن کلید با timeout
+            scr.timeout(100)  # 100ms timeout برای اینکه waterfall بتونه کار کنه
             key = scr.getch()
 
+            # Debug: نمایش کد کلید (برای دیباگ - می‌تونی حذف کنی)
+            if key != -1 and key < 256:
+                pass  # print(f"Key: {key}")  # برای دیباگ
+
+            # BACKSPACE
             if key in (8, 127, curses.KEY_BACKSPACE):
                 self.in_section = False
                 continue
 
+            # UP
             if key == curses.KEY_UP:
                 if not self.in_section:
                     self.section_index = (self.section_index - 1) % len(self.sections)
@@ -1314,6 +1338,7 @@ class CyberHUD:
                     self.item_index = (self.item_index - 1) % len(items)
                 continue
 
+            # DOWN
             if key == curses.KEY_DOWN:
                 if not self.in_section:
                     self.section_index = (self.section_index + 1) % len(self.sections)
@@ -1322,27 +1347,55 @@ class CyberHUD:
                     self.item_index = (self.item_index + 1) % len(items)
                 continue
 
-            if key in (10, 13):
+            # ENTER
+            if key in (10, 13, curses.KEY_ENTER):
                 if not self.in_section:
                     self.in_section = True
+                    self.item_index = 0  # هر بار که می‌ریم توی سکشن، اولین آیتم انتخاب بشه
                 else:
                     action = self.sections[self.section_index][1][self.item_index]["action"]
                     self.execute_action(action, scr)
                 continue
 
-            if self.settings["waterfall"] == "always":
-                self.matrix_rain(scr)
+            # ESC (بعضی ترمینال‌ها)
+            if key == 27:  # ESC
+                if self.in_section:
+                    self.in_section = False
+                continue
 
+            # waterfall همیشه - فقط یه کم
+            if self.settings["waterfall"] == "always" and key == -1:
+                for _ in range(2):
+                    x = random.randint(0, scr.getmaxyx()[1]-1)
+                    y = random.randint(0, scr.getmaxyx()[0]-1)
+                    try:
+                        scr.addstr(y, x, chr(random.randint(33, 126)), curses.color_pair(4))
+                    except:
+                        pass
+                scr.refresh()
 
 # ======================================================================
 # MAIN
 # ======================================================================
-
 def setup(scr):
     env = detect_environment()
     print(f"[ Environment detected: {env.upper()} ]")
-    time.sleep(0.5)
-
+    
+    # ===== چک آپدیت قبل از نمایش منو =====
+    try:
+        curses.endwin()
+        
+        from core.auto_update import check_for_update
+        check_for_update(prompt_user=True)
+        
+        scr = curses.initscr()
+        curses.noecho()
+        curses.cbreak()
+        scr.keypad(True)
+    except Exception as e:
+        print(f"Update check error: {e}")
+        time.sleep(1)
+    
     theme = load_theme()
     settings = load_settings()
 
@@ -1354,7 +1407,9 @@ def setup(scr):
 
     hud = CyberHUD(theme, settings)
     hud.loop(scr)
-
+# ======================================================================
+# PROGRAM ENTRY POINT
+# ======================================================================
 
 if __name__ == "__main__":
     try:

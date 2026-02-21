@@ -31,7 +31,7 @@
 
 **CyberHUD** is an advanced, **passive** security testing framework designed for **Bug Bounty Hunters** and **Security Researchers**. It operates without sending malicious requests, making it safe for authorized security assessments.
 
-### ✨ **What's New in v3.2**
+### ✨ **What's New in v3.3**
 - ✅ **Auto-Update System** - One-click updates from GitHub
 - ✅ **Improved Linux/macOS Support** - Fixed arrow keys and terminal issues
 - ✅ **Multi-Platform UI** - Consistent experience across Windows, Linux, macOS, Termux

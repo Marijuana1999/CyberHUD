@@ -14,11 +14,11 @@ from colorama import Fore, Style
 # =========================
 # Config
 # =========================
-CURRENT_VERSION = "3.1"
+CURRENT_VERSION = "3.3"
 GITHUB_REPO = "Marijuana1999/CyberHUD"
 UPDATE_LOG_FILE = "update_log.txt"
 CACHE_FILE = "update_cache.json"
-CACHE_DURATION = 3600  # 1 ساعت کش
+CACHE_DURATION = 3600 
 _last_update_check = 0
 _cached_info = None
 
@@ -26,7 +26,6 @@ _cached_info = None
 # Cache Management
 # =========================
 def load_cache():
-    """بارگذاری کش ذخیره شده"""
     try:
         if os.path.exists(CACHE_FILE):
             with open(CACHE_FILE, 'r') as f:
@@ -36,7 +35,6 @@ def load_cache():
     return {"last_check": 0, "data": None}
 
 def save_cache(data):
-    """ذخیره اطلاعات در کش"""
     try:
         cache = {
             "last_check": time.time(),
@@ -54,16 +52,13 @@ def get_current_version():
     return CURRENT_VERSION
 
 def get_latest_release_info(force_refresh=False):
-    """گرفتن آخرین release از گیت‌هاب API با کش"""
     global _cached_info, _last_update_check
     
     current_time = time.time()
     
-    # اگه کمتر از ۱ ساعت گذشته و کش داریم، همون رو برگردون
     if not force_refresh and _cached_info and (current_time - _last_update_check) < CACHE_DURATION:
         return _cached_info
-    
-    # چک کردن کش فایل
+
     cache = load_cache()
     if not force_refresh and (current_time - cache["last_check"]) < CACHE_DURATION and cache["data"]:
         _cached_info = cache["data"]
@@ -80,7 +75,7 @@ def get_latest_release_info(force_refresh=False):
         resp = requests.get(url, headers=headers, timeout=5)
         
         if resp.status_code == 403:
-            # Rate limit - برگردوندن کش
+            # Rate limit 
             if cache["data"]:
                 _cached_info = cache["data"]
                 _last_update_check = cache["last_check"]
@@ -95,7 +90,6 @@ def get_latest_release_info(force_refresh=False):
         
         latest_version = data.get("tag_name", "").replace("v", "")
         
-        # پیدا کردن فایل ZIP یا RAR
         download_url = None
         asset_name = None
         assets = data.get("assets", [])
@@ -118,14 +112,14 @@ def get_latest_release_info(force_refresh=False):
             "body": data.get("body", "No release notes")
         }
         
-        # ذخیره در کش
+        
         _cached_info = result
         _last_update_check = current_time
         save_cache(result)
         return result
         
     except:
-        # در صورت خطا، کش رو برگردون
+        
         if cache["data"]:
             _cached_info = cache["data"]
             _last_update_check = cache["last_check"]
@@ -177,7 +171,7 @@ def download_with_progress(url, output_file):
 # Ask for replacement permission
 # =========================
 def ask_replace_permission(file_path):
-    """از کاربر می‌پرسد که آیا اجازه جایگزینی فایل را می‌دهد"""
+    
     print(f"\n{Fore.YELLOW}⚠️ File already exists: {file_path}{Style.RESET_ALL}")
     choice = input(f"{Fore.YELLOW}Do you want to replace it? (y/n): {Style.RESET_ALL}").strip().lower()
     return choice == 'y'
@@ -186,14 +180,13 @@ def ask_replace_permission(file_path):
 # Extract & Replace with permission
 # =========================
 def extract_update(update_file="update.zip"):
-    """استخراج فایل آپدیت - با پرسیدن اجازه جایگزینی"""
     temp_dir = Path("update_temp")
     
     if not Path(update_file).exists():
         print(f"{Fore.RED}❌ Update file not found!{Style.RESET_ALL}")
         return False
 
-    # پاک کردن پوشه موقت
+    
     if temp_dir.exists():
         shutil.rmtree(temp_dir)
     temp_dir.mkdir(parents=True, exist_ok=True)
@@ -210,7 +203,7 @@ def extract_update(update_file="update.zip"):
         elif update_file.endswith('.rar'):
             print(f"  Detected RAR file")
             try:
-                # برای ویندوز، از 7z استفاده می‌کنیم
+                
                 if platform.system() == "Windows":
                     try:
                         result = subprocess.run(['7z', 'x', update_file, f'-o{temp_dir}', '-y'], 
@@ -225,7 +218,7 @@ def extract_update(update_file="update.zip"):
                         print(f"  Please install 7-Zip from: https://www.7-zip.org/")
                         return False
                 else:
-                    # لینوکس/مک - از unrar
+                    
                     try:
                         result = subprocess.run(['unrar', 'x', '-y', update_file, str(temp_dir)], 
                                               capture_output=True, text=True)
@@ -245,7 +238,7 @@ def extract_update(update_file="update.zip"):
             print(f"{Fore.RED}❌ Unsupported format! Only .zip or .rar{Style.RESET_ALL}")
             return False
 
-        # پیدا کردن مسیر اصلی
+        
         extracted_items = list(temp_dir.iterdir())
         if len(extracted_items) == 1 and extracted_items[0].is_dir():
             source_dir = extracted_items[0]
@@ -260,7 +253,7 @@ def extract_update(update_file="update.zip"):
 
         print(f"\n{Fore.CYAN}📁 Updating files...{Style.RESET_ALL}")
         
-        # اول لیست تمام فایل‌هایی که قراره جایگزین بشن رو جمع می‌کنیم
+        
         replace_files = []
         for root, dirs, files in os.walk(source_dir):
             for file in files:
@@ -277,11 +270,11 @@ def extract_update(update_file="update.zip"):
                 else:
                     new_count += 1
 
-        # اگه فایلی برای جایگزینی هست، از کاربر می‌پرسیم
+        
         if replace_files:
             print(f"\n{Fore.YELLOW}⚠️ {len(replace_files)} file(s) will be replaced.{Style.RESET_ALL}")
             
-            # نمایش ۵ فایل اول به عنوان نمونه
+           
             for i, item in enumerate(replace_files[:5]):
                 print(f"    {i+1}. {item['rel_path']}")
             if len(replace_files) > 5:
@@ -290,7 +283,7 @@ def extract_update(update_file="update.zip"):
             choice = input(f"\n{Fore.YELLOW}Do you want to proceed with replacement? (y/n): {Style.RESET_ALL}").strip().lower()
             
             if choice == 'y':
-                # جایگزینی فایل‌ها
+               
                 for item in replace_files:
                     try:
                         item['target'].parent.mkdir(parents=True, exist_ok=True)
@@ -308,7 +301,7 @@ def extract_update(update_file="update.zip"):
                 print(f"{Fore.YELLOW}  ⏭️ Replacement cancelled by user{Style.RESET_ALL}")
                 return False
 
-        # اضافه کردن فایل‌های جدید
+        
         if new_count > 0:
             print(f"\n{Fore.CYAN}📁 Adding new files...{Style.RESET_ALL}")
             for root, dirs, files in os.walk(source_dir):
@@ -327,7 +320,7 @@ def extract_update(update_file="update.zip"):
 
         print(f"\n{Fore.GREEN}✅ Update summary: {new_count} new, {replaced_count} replaced, {skipped_count} skipped{Style.RESET_ALL}")
         
-        # حالا که همه چی اوکیه، فایل ZIP رو پاک کن
+        
         try:
             if Path(update_file).exists():
                 Path(update_file).unlink()
@@ -344,7 +337,7 @@ def extract_update(update_file="update.zip"):
         print(f"{Fore.RED}❌ Extraction failed: {e}{Style.RESET_ALL}")
         return False
     finally:
-        # فقط پوشه موقت رو پاک کن
+        
         try:
             if temp_dir.exists():
                 shutil.rmtree(temp_dir)
@@ -358,7 +351,7 @@ def extract_update(update_file="update.zip"):
 _update_checked = False
 
 def check_for_update(prompt_user=True):
-    """بررسی آپدیت - فقط یک بار در هر اجرا"""
+    
     global _update_checked
     
     if _update_checked:
@@ -398,14 +391,14 @@ def check_for_update(prompt_user=True):
             choice = input(f"\n{Fore.YELLOW}⬇️ Download and install now? (y/n): {Style.RESET_ALL}").strip().lower()
             
             if choice == 'y':
-                # تشخیص پسوند فایل
+                
                 if asset_name.endswith('.rar'):
                     update_file = "update.rar"
                 else:
                     update_file = "update.zip"
                 
                 if download_with_progress(download_url, update_file):
-                    # قبل از اکسترکت، یک بار دیگه از کاربر می‌پرسیم
+                    
                     print(f"\n{Fore.CYAN}The update will replace some files.{Style.RESET_ALL}")
                     extract_choice = input(f"{Fore.YELLOW}Proceed with extraction? (y/n): {Style.RESET_ALL}").strip().lower()
                     
@@ -422,7 +415,7 @@ def check_for_update(prompt_user=True):
                             return False
                     else:
                         print(f"{Fore.YELLOW}⏭️ Extraction cancelled{Style.RESET_ALL}")
-                        # فایل دانلود شده رو پاک می‌کنیم
+                        
                         try:
                             if Path(update_file).exists():
                                 Path(update_file).unlink()
@@ -443,7 +436,7 @@ def check_for_update(prompt_user=True):
 # Menu Status
 # =========================
 def get_update_status_for_menu():
-    """وضعیت آپدیت برای نمایش در منو"""
+    
     try:
         info = get_latest_release_info(force_refresh=False)
         if not info:

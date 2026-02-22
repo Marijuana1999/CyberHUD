@@ -62,13 +62,11 @@ def clear_screen():
             os.system('cls')
         # برای لینوکس، مک، ترماکس
         else:
-            # استفاده از ANSI escape sequence
             sys.stdout.write('\033[2J\033[H')
             sys.stdout.flush()
-            # پشتیبان با clear
+
             os.system('clear')
     except:
-        # اگر هیچکدوم کار نکرد، یه عالمه خط جدید بزن
         print('\n' * 100)
 
 

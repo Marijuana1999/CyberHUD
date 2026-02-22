@@ -13,7 +13,7 @@ def ascii_menu(options, title="MENU", show_back=True):
     Simple ASCII menu that works in all environments
     Returns: selected option number as string
     """
-    clear_screen()  # این صفحه رو پاک میکنه
+    clear_screen()  
     
     # Print title
     print(Color.BC + "╔" + "═" * 50 + "╗")
@@ -62,7 +62,7 @@ def ultra_menu(options, title="ULTRA MENU", show_back=True):
     Fancy menu with better formatting
     Returns: selected option number as string
     """
-    clear_screen()  # این صفحه رو پاک میکنه
+    clear_screen()  
     
     # Print fancy header
     print(Color.BC + "╔" + "═" * 60 + "╗")

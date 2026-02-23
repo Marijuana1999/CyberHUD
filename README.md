@@ -1,6 +1,8 @@
 # 🚀 CyberHUD - Advanced Security Testing Framework
 
-**Version 3.2** | [GitHub Repository](https://github.com/Marijuana1999/CyberHUD) | [Report Bug](https://github.com/Marijuana1999/CyberHUD/issues)
+**Version 3.4**  
+GitHub Repository: https://github.com/Marijuana1999/CyberHUD  
+Report Bug: https://github.com/Marijuana1999/CyberHUD/issues  
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3.6%2B-blue?style=for-the-badge&logo=python"/>
@@ -11,127 +13,142 @@
 
 ---
 
-## 📋 **Table of Contents**
-- [Overview](#-overview)
-- [Features](#-features)
-- [Multi-Platform Support](#-multi-platform-support)
-- [Quick Installation](#-quick-installation)
-- [Usage Guide](#-usage-guide)
-- [Modules Description](#-modules-description)
-- [Auto-Update System](#-auto-update-system)
-- [Themes & Customization](#-themes--customization)
-- [Security Features](#-security-features)
-- [Troubleshooting](#-troubleshooting)
-- [Contributing](#-contributing)
-- [License](#-license)
+## 📋 Table of Contents
+- Overview
+- What's New in v3.4
+- Features
+- Multi-Platform Support
+- Quick Installation
+- Usage Guide
+- Modules Description
+- Release History
+- Auto-Update System
+- Themes & Customization
+- Security Features
+- Troubleshooting
+- Contributing
+- License
+- Contact
 
 ---
 
-## 🎯 **Overview**
+# 🎯 Overview
 
-**CyberHUD** is an advanced, **passive** security testing framework designed for **Bug Bounty Hunters** and **Security Researchers**. It operates without sending malicious requests, making it safe for authorized security assessments.
+CyberHUD is an advanced, **passive** security testing framework designed for **Bug Bounty Hunters** and **Security Researchers**.
 
-### ✨ **What's New in v3.3**
-- ✅ **Auto-Update System** - One-click updates from GitHub
-- ✅ **Improved Linux/macOS Support** - Fixed arrow keys and terminal issues
-- ✅ **Multi-Platform UI** - Consistent experience across Windows, Linux, macOS, Termux
-- ✅ **Better Error Handling** - Permission prompts for file replacements
-- ✅ **Optimized Performance** - No more lag in menus
-- ✅ **Enhanced Security Checker** - Better VPN, DNS, and IP detection
-- ✅ **Fixed API Rate Limiting** - Smart caching reduces GitHub API calls
+It performs safe reconnaissance and vulnerability discovery without sending destructive payloads, making it suitable for authorized security assessments.
 
 ---
 
-## ⚡ **Features**
+# ✨ What's New in v3.4
 
-### 🔍 **Reconnaissance**
+## 🛡 Advanced WAF Detection Engine
+- 30+ WAF Signatures (Cloudflare, AWS WAF, Akamai, Imperva, F5, ModSecurity, etc.)
+- Multi-layer detection (Headers, Cookies, HTML patterns, Challenge pages)
+- 200+ payload effectiveness testing
+- 15+ evasion technique detection
+- Confidence scoring (CRITICAL / HIGH / MEDIUM / LOW)
+
+## 🔍 InfoLeak Detector
+- WordPress REST API discovery
+- User enumeration detection
+- Sensitive file scanner (.env, backups, configs, debug logs)
+- Plugin & theme detection
+- Automatic risk assessment
+
+## 📊 Professional Logging System
+- JSON structured logging
+- Human-readable text logs
+- Module-based directories (`logs/waf/`, `logs/infoleak/`)
+- Timestamped filenames
+- Colorized console output
+- Cross-platform compatibility
+
+---
+
+# ⚡ Features
+
+## 🔍 Reconnaissance
 - DNS Enumeration (A, AAAA, MX, NS, TXT, SOA)
-- Reverse IP Lookup (find domains on same server)
-- ASN & WHOIS Information
-- Web Crawler (extract URLs, forms, parameters)
-- Technology Fingerprinting (WordPress, Laravel, React, etc.)
-- HTTP Headers Analysis
-- IP Geolocation Tracker
+- Reverse IP Lookup
+- ASN & WHOIS
+- Web Crawler
+- Technology Fingerprinting
+- HTTP Header Analysis
+- IP Geolocation
 
-### 🔬 **Scanning**
-- Port Scanner (common ports)
+## 🔬 Scanning
+- Port Scanner
 - SSL/TLS Security Check
 - Rate Limit Testing
 
-### 🌐 **Web Security**
-- WAF Detection (Cloudflare, F5, ModSecurity, etc.)
+## 🌐 Web Security
+- WAF Detection
+- InfoLeak Detector
 - CORS Misconfiguration Scanner
 - Cookie Security Analyzer
 - Robots.txt Recon
 - Passive XSS Detection
 - Passive SQLi Detection
 
-### 💣 **Exploits**
-- Backup File Finder (zip, sql, bak, old)
+## 💣 Exploits
+- Backup File Finder
 - Backup Content Verification
 
-### 🛠️ **Utilities**
+## 🛠 Utilities
 - Directory Scanner
 - Screenshot Capture (Selenium)
 
-### ⚙️ **Advanced**
+## ⚙ Advanced
 - JWT Analyzer
 - GraphQL Endpoint Scanner
 - Cache Poisoning Tester
 - Rate Limit Bypass
 - Subdomain Takeover Checker
 
-### 🛡️ **User Security**
+## 🛡 User Security
 - VPN Detection
 - DNS Leak Test
 - IP Hider (DNS Changer)
 - Proxy Detection
 - Firewall Status Check
+- Security Score
 
 ---
 
-## 💻 **Multi-Platform Support**
+# 💻 Multi-Platform Support
 
-| Platform | Support | Status |
-|----------|---------|--------|
-| **Windows 10/11** | ✅ Full | CMD, PowerShell, Git Bash |
-| **Linux** (Ubuntu, Debian, Kali) | ✅ Full | Terminal |
-| **macOS** | ✅ Full | Terminal |
-| **Termux** (Android) | ✅ Full | pkg install |
-
-### **Tested On:**
-- ✅ Windows 10/11
-- ✅ Ubuntu 20.04/22.04
-- ✅ Kali Linux
-- ✅ macOS Ventura/Sonoma
-- ✅ Termux (Android 10+)
+| Platform | Status |
+|----------|--------|
+| Windows 10/11 | ✅ Full |
+| Linux (Ubuntu, Kali, Debian) | ✅ Full |
+| macOS | ✅ Full |
+| Termux (Android) | ✅ Full |
 
 ---
 
-## 🚀 **Quick Installation**
+# 🚀 Quick Installation
 
-### **Windows**
-```batch
-# Just double-click
+## Windows
+```
 run.bat
 ```
 
-### **Linux / macOS**
-```bash
-# Make executable and run
+## Linux / macOS
+```
 chmod +x run.sh
 ./run.sh
 ```
 
-### **Termux (Android)**
-```bash
+## Termux
+```
 pkg update && pkg install python -y
 chmod +x run.sh
 ./run.sh
 ```
 
-### **Manual Installation**
-```bash
+## Manual Installation
+```
 git clone https://github.com/Marijuana1999/CyberHUD.git
 cd CyberHUD
 pip install -r requirements.txt
@@ -140,184 +157,183 @@ python menu.py
 
 ---
 
-## 📖 **Usage Guide**
+# 📖 Usage Guide
 
-### **Navigation**
+## Navigation
+
 | Key | Function |
 |-----|----------|
-| ↑ ↓ | Navigate menu |
-| ENTER | Select item |
-| BACKSPACE | Go back |
-| ESC | Back to menu |
+| ↑ ↓ | Navigate |
+| ENTER | Select |
+| BACKSPACE | Go Back |
+| ESC | Main Menu |
 
-### **Basic Workflow**
-1. **Set Target** - Enter your target domain
-2. **Recon** - Gather information
-3. **Scan** - Find vulnerabilities
-4. **Report** - Save results
+## Basic Workflow
 
-### **First Run**
-- Auto-checks for Python packages
-- Asks for update if new version available
-- Creates `logs/` directory for results
+1. Set Target
+2. Run Recon Modules
+3. Run Security Scanners
+4. Review Logs in `logs/` directory
 
 ---
 
-## 🔄 **Auto-Update System**
+# 📦 Modules Description
 
-### **How It Works**
-1. Checks GitHub API for latest release
-2. Shows changelog and asks for permission
-3. Downloads new version (ZIP/RAR)
-4. Asks for file replacement confirmation
-5. Automatically restarts
-
-### **Features**
-- ✅ **One-click update** from menu (Settings → Check for Updates)
-- ✅ **Smart caching** (only checks API every hour)
-- ✅ **Cross-platform** (works on Windows, Linux, macOS)
-- ✅ **Permission prompts** for file replacement
-- ✅ **Progress bar** during download
-- ✅ **Automatic restart** after update
-
-### **Update Process**
-```
-🔍 Checking for updates...
-  Current version: 3.1
-  Latest version:  3.2
-  Asset: CyberHUD_v3.2.zip
-
-✨ New version 3.2 available!
-
-📝 Release Notes:
-  • Added auto-update system
-  • Fixed Linux arrow keys
-  • Improved performance
-
-⬇️ Download and install now? (y/n): y
-📥 Downloading update...
-[██████████████████████████████] 100%
-
-⚠️ 5 file(s) will be replaced.
-Do you want to proceed? (y/n): y
-  🔄 Replaced: menu.py
-  🔄 Replaced: core/auto_update.py
-  ➕ Added: new_module.py
-
-✅ Update applied successfully!
-🔄 Restarting...
-```
+| Category | Modules |
+|----------|---------|
+| Recon | DNS, Reverse IP, ASN, Crawler, Headers |
+| Scanning | Ports, SSL, Rate Limit |
+| Web Security | WAF, InfoLeak, CORS, Cookies, XSS, SQLi |
+| Exploits | Backup Finder |
+| Utilities | Directory Scan, Screenshot |
+| Advanced | JWT, GraphQL, Cache Poisoning |
+| Security | Security Checker, IP Hider |
 
 ---
 
-## 🎨 **Themes & Customization**
+# 📜 Release History
 
-### **Available Themes (17)**
-| Theme | Description | CMD Color |
-|-------|-------------|-----------|
-| Dark Neon | Classic dark with neon accents | Light Green |
-| Blue Soft | Soft blue theme | Light Blue |
-| Hacker Green | Classic green matrix style | Light Green |
-| Matrix Reloaded | Matrix with cyan | Light Green |
-| Blood Red | Aggressive red theme | Light Red |
-| Royal Purple | Elegant purple | Light Magenta |
-| Ocean Deep | Deep blue ocean | Light Cyan |
-| Sunset Orange | Warm sunset colors | Light Yellow |
-| Midnight Blue | Dark blue with cyan | Dark Blue |
-| Amber Glow | Retro amber style | Dark Yellow |
-| Cyber Punk | Cyberpunk 2077 style | Light Magenta |
-| Ghost White | Clean white with blue | Bright White |
-| Forest Green | Dark green forest | Dark Green |
-| Lava Red | Hot lava red | Light Red |
-| Arctic Ice | Cold arctic blue | Light Cyan |
-| Retro Terminal | Classic monochrome | Dark Green |
-| Neon Pink | Bright neon pink | Light Magenta |
+## v3.4 (Current)
+- Advanced WAF Detection Engine
+- InfoLeak Detector
+- Professional Logging System
+- Payload Effectiveness Testing
+- Evasion Detection
+- Risk Scoring System
 
-### **Font Settings** (Windows CMD)
-- Right-click title bar → Properties → Font
-- Choose from: Consolas, Lucida Console, Courier New
+## v3.3
+- Auto-Update System
+- Linux/macOS improvements
+- API caching system
+- Performance optimizations
 
----
+## v3.2
+- User Security Checker
+- IP Hider
+- 17 Themes
+- Security Score System
 
-## 🔐 **Security Features**
+## v3.1
+- Performance optimization
+- SSL scan fixes
+- Better timeout handling
 
-### **User Security Checker**
-```bash
-SECURITY → Security Checker
-```
-- ✅ VPN Detection (20+ VPN services)
-- ✅ DNS Server Detection
-- ✅ IP Geolocation
-- ✅ Proxy Detection
-- ✅ Tor Detection
-- ✅ Firewall Status
-- ✅ Security Score
+## v3.0
+- Full framework redesign
+- Modular architecture
+- Multi-threading support
+- HTML/PDF reports
 
-### **IP Hider**
-```bash
-SECURITY → IP Hider
-```
-- Change DNS to secure servers (1.1.1.1, 8.8.8.8)
-- DNS leak testing
-- Proxy detection
+## v2.0
+- Logging system
+- Target management
+- Improved menu interface
+
+## v1.0
+- Initial release
+- Basic scanning modules
 
 ---
 
-## 🐛 **Troubleshooting**
+# 🔄 Auto-Update System
 
-### **Common Issues**
+- Checks GitHub API for latest release
+- Displays changelog
+- Downloads update package
+- File replacement confirmation
+- Automatic restart
+- Smart API caching (1 hour)
+
+---
+
+# 🎨 Themes & Customization
+
+17 Built-in themes including:
+- Hacker Green
+- Matrix Reloaded
+- Cyber Punk
+- Neon Pink
+- Retro Terminal
+- Midnight Blue
+- Ocean Deep
+- Arctic Ice
+- Blood Red
+- And more...
+
+Windows users can customize fonts via CMD Properties.
+
+---
+
+# 🔐 Security Features
+
+## Security Checker Includes:
+- VPN Detection
+- DNS Server Analysis
+- IP Geolocation
+- Proxy Detection
+- Tor Detection
+- Firewall Status
+- Overall Security Score
+
+## IP Hider:
+- Change DNS (1.1.1.1 / 8.8.8.8)
+- DNS Leak Testing
+- Proxy Detection
+
+---
+
+# 🐛 Troubleshooting
 
 | Problem | Solution |
-|---------|----------|
-| Arrow keys don't work in Linux | Update to v3.2 or run `stty sane` |
-| Update fails with permission error | Run as administrator (Windows) or with `sudo` (Linux) |
-| API rate limit exceeded | Wait 1 hour or use cached data |
-| RAR extraction fails | Install 7-Zip (Windows) or `unrar` (Linux) |
-| Python not found | Install Python 3.6+ and add to PATH |
+|----------|----------|
+| Arrow keys not working | Update to v3.3+ |
+| Update permission error | Run as Administrator / sudo |
+| API rate limit exceeded | Wait 1 hour |
+| RAR extraction fails | Install 7-Zip or unrar |
+| Python not found | Install Python 3.6+ |
 
-### **Debug Mode**
-Check `update_log.txt` for update-related errors
-Check `logs/` directory for scan results
+Logs available inside `logs/`
 
 ---
 
-## 🤝 **Contributing**
+# 🤝 Contributing
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing`)
-5. Open Pull Request
-
-### **Development Setup**
-```bash
+```
 git clone https://github.com/Marijuana1999/CyberHUD.git
 cd CyberHUD
 pip install -r requirements-dev.txt
 python menu.py
 ```
 
----
-
-## 📄 **License**
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-**Disclaimer:** This tool is for educational purposes and authorized security testing only. Users are responsible for complying with applicable laws.
+1. Fork repository  
+2. Create feature branch  
+3. Commit changes  
+4. Push branch  
+5. Open Pull Request  
 
 ---
 
-## 🌟 **Star History**
+# 📄 License
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Marijuana1999/CyberHUD&type=Date)](https://star-history.com/#Marijuana1999/CyberHUD&Date)
+MIT License  
+
+Disclaimer:  
+This tool is for educational purposes and authorized security testing only.  
+Users are responsible for complying with applicable laws.
 
 ---
 
-## 📞 **Contact**
+# 🌟 Star History
 
-- **Author:** Marijuana1999
-- **GitHub:** [https://github.com/Marijuana1999](https://github.com/Marijuana1999)
-- **Issues:** [https://github.com/Marijuana1999/CyberHUD/issues](https://github.com/Marijuana1999/CyberHUD/issues)
+https://api.star-history.com/svg?repos=Marijuana1999/CyberHUD&type=Date
+
+---
+
+# 📞 Contact
+
+Author: Marijuana1999  
+GitHub: https://github.com/Marijuana1999  
+Issues: https://github.com/Marijuana1999/CyberHUD/issues  
 
 ---
 

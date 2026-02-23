@@ -323,8 +323,6 @@ Users are responsible for complying with applicable laws.
 
 ---
 
----
-
 # ⚠️🚫 LEGAL & LIABILITY DISCLAIMER 🚫⚠️
 
 ## ❗ IMPORTANT NOTICE — READ CAREFULLY ❗

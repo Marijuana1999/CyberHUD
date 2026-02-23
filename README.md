@@ -383,12 +383,6 @@ It is **NOT** intended to facilitate malicious activity.
 ### 🔥 If you do not agree with these terms — DO NOT USE THIS SOFTWARE.
 
 Use responsibly. Use ethically.
----
-# 🌟 Star History
-
-https://api.star-history.com/svg?repos=Marijuana1999/CyberHUD&type=Date
-
----
 
 # 📞 Contact
 

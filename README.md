@@ -323,6 +323,69 @@ Users are responsible for complying with applicable laws.
 
 ---
 
+---
+
+# ⚠️🚫 LEGAL & LIABILITY DISCLAIMER 🚫⚠️
+
+## ❗ IMPORTANT NOTICE — READ CAREFULLY ❗
+
+CyberHUD is an open-source cybersecurity framework developed strictly for:
+
+- 🎓 Educational purposes  
+- 🔬 Security research  
+- 🛡 Authorized penetration testing  
+
+---
+
+## 🚫 STRICTLY PROHIBITED
+
+🚫 **DO NOT use this tool for illegal activities.**  
+🚫 **DO NOT test systems without explicit written authorization.**  
+🚫 **DO NOT attempt unauthorized access, disruption, or exploitation.**
+
+Any form of illegal, malicious, or unethical usage is strictly forbidden.
+
+---
+
+## 🔒 USER RESPONSIBILITY
+
+By downloading, accessing, or using this software, you agree that:
+
+- You are **fully and solely responsible** for your actions.
+- You will only use this tool on systems you own or have explicit permission to test.
+- You understand and comply with all applicable local, national, and international laws.
+
+---
+
+## ⚖️ NO LIABILITY
+
+The developer and contributors:
+
+❗ Assume **NO responsibility** for misuse.  
+❗ Are **NOT liable** for any damages, data loss, legal consequences, or criminal charges resulting from improper use.  
+❗ Provide this software **"AS IS"**, without any warranty, express or implied.
+
+If you choose to misuse this software, you do so entirely at your own risk.
+
+---
+
+## 🌍 Open-Source Purpose
+
+This project is made open-source to promote:
+
+- Transparency  
+- Learning  
+- Skill development  
+- Collaboration within the cybersecurity community  
+
+It is **NOT** intended to facilitate malicious activity.
+
+---
+
+### 🔥 If you do not agree with these terms — DO NOT USE THIS SOFTWARE.
+
+Use responsibly. Use ethically.
+
 # 🌟 Star History
 
 https://api.star-history.com/svg?repos=Marijuana1999/CyberHUD&type=Date

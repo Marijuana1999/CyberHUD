@@ -393,3 +393,9 @@ Issues: https://github.com/Marijuana1999/CyberHUD/issues
 ---
 
 **Made with ❤️ for the Bug Bounty Community**
+
+
+---
+![Alt text]
+(![17720884905647802774063367629756](https://github.com/user-attachments/assets/6b8da054-872b-42c1-9e42-00f2f8f29053)
+)

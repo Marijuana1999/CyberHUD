@@ -1,8 +1,6 @@
 # 🚀 CyberHUD - Advanced Security Testing Framework
 
-**Version 3.4**  
-GitHub Repository: https://github.com/Marijuana1999/CyberHUD  
-Report Bug: https://github.com/Marijuana1999/CyberHUD/issues  
+**Version 3.4**     
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3.6%2B-blue?style=for-the-badge&logo=python"/>

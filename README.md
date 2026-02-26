@@ -396,7 +396,6 @@ Issues: https://github.com/Marijuana1999/CyberHUD/issues
 
 
 ---
-![Alt Text]
-(![17720884905647802774063367629756](https://github.com/user-attachments/assets/79ca3430-f5f1-475b-8db1-5fa830cfa7cc)
-)
+![17720884905647802774063367629756](https://github.com/user-attachments/assets/9375974d-2ad5-4a5c-8a4f-aaf779658851)
+
 

@@ -1,6 +1,6 @@
 # 🚀 CyberHUD - Advanced Security Testing Framework
 
-**Version 3.4**     
+**Version 3.5**
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3.6%2B-blue?style=for-the-badge&logo=python"/>
@@ -13,7 +13,7 @@
 
 ## 📋 Table of Contents
 - Overview
-- What's New in v3.4
+- What's New in v3.5
 - Features
 - Multi-Platform Support
 - Quick Installation
@@ -38,9 +38,38 @@ It performs safe reconnaissance and vulnerability discovery without sending dest
 
 ---
 
-# ✨ What's New in v3.4
+# ✨ What's New in v3.5
 
-## 🛡 Advanced WAF Detection Engine
+## ☁️ CloudHunter Module (NEW!)
+- **Cloud Service Discovery**: Detect AWS, GCP, Azure, Cloudflare, and 20+ cloud services
+- **IP Range Detection**: Identify cloud providers by IP address ranges
+- **Automatic Vulnerability Testing**:
+  - Bucket Listing (S3, GCS, Azure Blob)
+  - Metadata Endpoint Exposure
+  - Subdomain Takeover
+  - Sensitive File Detection (.env, config.json, credentials)
+  - Environment Variable Exposure
+- **DNS Brute Force**: 150+ subdomain wordlist
+- **Certificate Transparency Logs**: Extract subdomains from CRT logs
+
+## 🔎 Telegram OSINT Module (NEW!)
+### API Version (requires Telegram API credentials)
+- User information gathering (ID, username, name, bio, phone)
+- Channel/group membership detection
+- Profile photos download
+- Social media cross-referencing
+- Web presence search
+- Risk assessment scoring
+
+### Public Version (no API required)
+- Extract profile info from t.me/username
+- Search TelegramDB, TGStat, Combot
+- Message history scraping
+- Similar accounts detection
+- Sticker pack discovery
+- Social media cross-referencing
+
+## 🛡 Advanced WAF Detection Engine (Enhanced)
 - 30+ WAF Signatures (Cloudflare, AWS WAF, Akamai, Imperva, F5, ModSecurity, etc.)
 - Multi-layer detection (Headers, Cookies, HTML patterns, Challenge pages)
 - 200+ payload effectiveness testing
@@ -57,10 +86,17 @@ It performs safe reconnaissance and vulnerability discovery without sending dest
 ## 📊 Professional Logging System
 - JSON structured logging
 - Human-readable text logs
-- Module-based directories (`logs/waf/`, `logs/infoleak/`)
+- Module-based directories (`logs/waf/`, `logs/infoleak/`, `logs/cloud_hunter/`)
 - Timestamped filenames
 - Colorized console output
 - Cross-platform compatibility
+
+## 🔄 Auto-Update System (Enhanced)
+- Progress bar during download
+- RAR/ZIP extraction support
+- File replacement confirmation
+- Smart API caching (1 hour)
+- Automatic restart after update
 
 ---
 
@@ -103,6 +139,11 @@ It performs safe reconnaissance and vulnerability discovery without sending dest
 - Cache Poisoning Tester
 - Rate Limit Bypass
 - Subdomain Takeover Checker
+- **CloudHunter (NEW)**
+
+## 🔎 OSINT
+- **Telegram OSINT - API Version (NEW)**
+- **Telegram OSINT - Public Version (NEW)**
 
 ## 🛡 User Security
 - VPN Detection
@@ -128,30 +169,30 @@ It performs safe reconnaissance and vulnerability discovery without sending dest
 # 🚀 Quick Installation
 
 ## Windows
-```
 run.bat
-```
+
+
 
 ## Linux / macOS
-```
 chmod +x run.sh
 ./run.sh
-```
+
+
 
 ## Termux
-```
 pkg update && pkg install python -y
 chmod +x run.sh
 ./run.sh
-```
+
+
 
 ## Manual Installation
-```
 git clone https://github.com/Marijuana1999/CyberHUD.git
 cd CyberHUD
 pip install -r requirements.txt
 python menu.py
-```
+
+
 
 ---
 
@@ -173,6 +214,19 @@ python menu.py
 3. Run Security Scanners
 4. Review Logs in `logs/` directory
 
+## Telegram OSINT Setup
+
+### API Version (requires credentials)
+1. Get API credentials from https://my.telegram.org/apps
+2. Set environment variables:
+   - `TG_API_ID` - Your API ID
+   - `TG_API_HASH` - Your API Hash
+   - `TG_PHONE` - Your phone number
+3. Run the module from menu
+
+### Public Version (no credentials needed)
+- Works immediately! No setup required.
+
 ---
 
 # 📦 Modules Description
@@ -182,16 +236,26 @@ python menu.py
 | Recon | DNS, Reverse IP, ASN, Crawler, Headers |
 | Scanning | Ports, SSL, Rate Limit |
 | Web Security | WAF, InfoLeak, CORS, Cookies, XSS, SQLi |
-| Exploits | Backup Finder |
+| Exploits | Backup Finder, Backup Exploit |
 | Utilities | Directory Scan, Screenshot |
-| Advanced | JWT, GraphQL, Cache Poisoning |
+| Advanced | JWT, GraphQL, Cache Poisoning, **CloudHunter** |
+| OSINT | **Telegram OSINT (API + Public)** |
 | Security | Security Checker, IP Hider |
 
 ---
 
 # 📜 Release History
 
-## v3.4 (Current)
+## v3.5 (Current)
+- **CloudHunter Module** - Cloud service discovery & vulnerability testing
+- **Telegram OSINT Module** - API and Public versions
+- IP range detection for cloud providers
+- Bucket listing & metadata exposure testing
+- Enhanced auto-update with progress bar
+- 150+ subdomain wordlist for DNS brute force
+- Certificate transparency log parsing
+
+## v3.4
 - Advanced WAF Detection Engine
 - InfoLeak Detector
 - Professional Logging System
@@ -236,10 +300,11 @@ python menu.py
 # 🔄 Auto-Update System
 
 - Checks GitHub API for latest release
-- Displays changelog
-- Downloads update package
+- Displays changelog with release notes
+- Downloads update with progress bar
+- Supports ZIP and RAR extraction
 - File replacement confirmation
-- Automatic restart
+- Automatic restart after update
 - Smart API caching (1 hour)
 
 ---
@@ -256,6 +321,9 @@ python menu.py
 - Ocean Deep
 - Arctic Ice
 - Blood Red
+- Dark Neon
+- Royal Purple
+- Amber Glow
 - And more...
 
 Windows users can customize fonts via CMD Properties.
@@ -283,37 +351,37 @@ Windows users can customize fonts via CMD Properties.
 # 🐛 Troubleshooting
 
 | Problem | Solution |
-|----------|----------|
+|---------|----------|
 | Arrow keys not working | Update to v3.3+ |
 | Update permission error | Run as Administrator / sudo |
 | API rate limit exceeded | Wait 1 hour |
 | RAR extraction fails | Install 7-Zip or unrar |
 | Python not found | Install Python 3.6+ |
+| Telegram API errors | Check API credentials |
+| CloudHunter no results | Target may not use cloud services |
 
 Logs available inside `logs/`
 
 ---
 
 # 🤝 Contributing
-
-```
 git clone https://github.com/Marijuana1999/CyberHUD.git
 cd CyberHUD
 pip install -r requirements-dev.txt
 python menu.py
-```
 
-1. Fork repository  
-2. Create feature branch  
-3. Commit changes  
-4. Push branch  
-5. Open Pull Request  
+
+1. Fork repository
+2. Create feature branch
+3. Commit changes
+4. Push branch
+5. Open Pull Request
 
 ---
 
 # 📄 License
 
-MIT License  
+MIT License
 
 Disclaimer:  
 This tool is for educational purposes and authorized security testing only.  
@@ -327,9 +395,9 @@ Users are responsible for complying with applicable laws.
 
 CyberHUD is an open-source cybersecurity framework developed strictly for:
 
-- 🎓 Educational purposes  
-- 🔬 Security research  
-- 🛡 Authorized penetration testing  
+- 🎓 Educational purposes
+- 🔬 Security research
+- 🛡 Authorized penetration testing
 
 ---
 
@@ -369,10 +437,10 @@ If you choose to misuse this software, you do so entirely at your own risk.
 
 This project is made open-source to promote:
 
-- Transparency  
-- Learning  
-- Skill development  
-- Collaboration within the cybersecurity community  
+- Transparency
+- Learning
+- Skill development
+- Collaboration within the cybersecurity community
 
 It is **NOT** intended to facilitate malicious activity.
 
@@ -386,14 +454,12 @@ Use responsibly. Use ethically.
 
 Author: Marijuana1999  
 GitHub: https://github.com/Marijuana1999  
-Issues: https://github.com/Marijuana1999/CyberHUD/issues  
+Issues: https://github.com/Marijuana1999/CyberHUD/issues
 
 ---
 
 **Made with ❤️ for the Bug Bounty Community**
 
-
 ---
-![17720884905647802774063367629756](https://github.com/user-attachments/assets/9375974d-2ad5-4a5c-8a4f-aaf779658851)
 
-
+![CyberHUD Screenshot](https://github.com/user-attachments/assets/9375974d-2ad5-4a5c-8a4f-aaf779658851)
